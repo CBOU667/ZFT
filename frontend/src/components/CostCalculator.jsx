@@ -172,7 +172,7 @@ const CostCalculator = () => {
 
           <TabsContent value="calculator" className="space-y-8">{/* Calculator Tab Content */}
 
-        {/* Add New Product Form */}
+            {/* Add New Product Form */}
         <Card className="shadow-lg border-0 bg-white/80 backdrop-blur-sm">
           <CardHeader className="bg-slate-900 text-white rounded-t-lg">
             <CardTitle className="flex items-center gap-2">
