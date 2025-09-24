@@ -157,6 +157,21 @@ const CostCalculator = () => {
           </p>
         </div>
 
+        {/* Tabs */}
+        <Tabs defaultValue="calculator" className="w-full">
+          <TabsList className="grid w-full grid-cols-2 mb-8">
+            <TabsTrigger value="calculator" className="flex items-center gap-2">
+              <Calculator className="w-4 h-4" />
+              Калькулятор
+            </TabsTrigger>
+            <TabsTrigger value="summary" className="flex items-center gap-2">
+              <BarChart3 className="w-4 h-4" />
+              Сводная таблица
+            </TabsTrigger>
+          </TabsList>
+
+          <TabsContent value="calculator" className="space-y-8">{/* Calculator Tab Content */}
+
         {/* Add New Product Form */}
         <Card className="shadow-lg border-0 bg-white/80 backdrop-blur-sm">
           <CardHeader className="bg-slate-900 text-white rounded-t-lg">
