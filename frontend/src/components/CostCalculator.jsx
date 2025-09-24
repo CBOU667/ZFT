@@ -4,7 +4,9 @@ import { Button } from './ui/button';
 import { Input } from './ui/input';
 import { Label } from './ui/label';
 import { Separator } from './ui/separator';
-import { Plus, Trash2, Calculator, TrendingUp, Package } from 'lucide-react';
+import { Tabs, TabsContent, TabsList, TabsTrigger } from './ui/tabs';
+import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from './ui/table';
+import { Plus, Trash2, Calculator, TrendingUp, Package, BarChart3 } from 'lucide-react';
 import { mockData } from '../mock/mockData';
 
 const CostCalculator = () => {
