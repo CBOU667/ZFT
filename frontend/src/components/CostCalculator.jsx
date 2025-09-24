@@ -170,7 +170,8 @@ const CostCalculator = () => {
             </TabsTrigger>
           </TabsList>
 
-          <TabsContent value="calculator" className="space-y-8">{/* Calculator Tab Content */}
+          <TabsContent value="calculator" className="space-y-8">
+            {/* Calculator Tab Content */}
 
             {/* Add New Product Form */}
         <Card className="shadow-lg border-0 bg-white/80 backdrop-blur-sm">
