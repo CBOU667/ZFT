@@ -328,13 +328,13 @@ const CostCalculator = () => {
           </CardContent>
         </Card>
 
-        {/* Products List */}
-        {products.length > 0 && (
-          <div className="space-y-6">
-            <div className="flex items-center gap-2">
-              <TrendingUp className="w-6 h-6 text-slate-900" />
-              <h2 className="text-2xl font-bold text-slate-900">Анализ продуктов</h2>
-            </div>
+            {/* Products List */}
+            {products.length > 0 && (
+              <div className="space-y-6">
+                <div className="flex items-center gap-2">
+                  <TrendingUp className="w-6 h-6 text-slate-900" />
+                  <h2 className="text-2xl font-bold text-slate-900">Анализ продуктов</h2>
+                </div>
 
             {products.map((product, productIndex) => {
               const materialsCost = calculateMaterialsCost(product.materials);
