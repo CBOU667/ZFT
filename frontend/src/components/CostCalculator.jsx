@@ -523,10 +523,127 @@ const CostCalculator = () => {
                     </div>
                   </CardContent>
                 </Card>
-              );
-            })}
-          </div>
-        )}
+                );
+              })}
+            </div>
+          )}
+          </TabsContent>
+
+          <TabsContent value="summary" className="space-y-6">
+            {/* Summary Tab Content */}
+            <div className="flex items-center gap-2 mb-6">
+              <BarChart3 className="w-6 h-6 text-slate-900" />
+              <h2 className="text-2xl font-bold text-slate-900">Сводная таблица продуктов</h2>
+            </div>
+
+            {products.length > 0 ? (
+              <Card className="shadow-lg border-0 bg-white/90 backdrop-blur-sm">
+                <CardHeader className="bg-slate-900 text-white rounded-t-lg">
+                  <CardTitle>Анализ рентабельности продукции</CardTitle>
+                </CardHeader>
+                <CardContent className="p-0">
+                  <Table>
+                    <TableHeader>
+                      <TableRow className="border-b border-slate-200">
+                        <TableHead className="text-left font-semibold text-slate-700 py-4 px-6">
+                          Название продукта
+                        </TableHead>
+                        <TableHead className="text-center font-semibold text-slate-700 py-4 px-4">
+                          Себестоимость
+                        </TableHead>
+                        <TableHead className="text-center font-semibold text-slate-700 py-4 px-4">
+                          Цена конкурентов
+                        </TableHead>
+                        <TableHead className="text-center font-semibold text-slate-700 py-4 px-4">
+                          Потенциальная прибыль
+                        </TableHead>
+                        <TableHead className="text-center font-semibold text-slate-700 py-4 px-4">
+                          Рентабельность
+                        </TableHead>
+                      </TableRow>
+                    </TableHeader>
+                    <TableBody>
+                      {products.map((product, index) => {
+                        const totalCost = calculateTotalCost(product.materials, product.productionCosts);
+                        const competitorPrice = parseFloat(product.competitorPrice) || 0;
+                        const profit = calculateProfit(totalCost, product.competitorPrice);
+                        const profitMargin = competitorPrice > 0 ? ((profit / competitorPrice) * 100) : 0;
+
+                        return (
+                          <TableRow 
+                            key={product.id || index}
+                            className="border-b border-slate-100 hover:bg-slate-50 transition-colors"
+                          >
+                            <TableCell className="py-4 px-6 font-medium text-slate-900">
+                              {product.name}
+                            </TableCell>
+                            <TableCell className="py-4 px-4 text-center">
+                              <div className="font-semibold text-slate-800 bg-slate-100 px-3 py-2 rounded-lg inline-block">
+                                {totalCost.toFixed(2)} ₽
+                              </div>
+                            </TableCell>
+                            <TableCell className="py-4 px-4 text-center">
+                              <div className="font-semibold text-blue-800 bg-blue-50 px-3 py-2 rounded-lg inline-block">
+                                {competitorPrice.toFixed(2)} ₽
+                              </div>
+                            </TableCell>
+                            <TableCell className="py-4 px-4 text-center">
+                              <div className={`font-bold px-3 py-2 rounded-lg inline-block ${
+                                profit > 0 
+                                  ? 'text-emerald-700 bg-emerald-50' 
+                                  : profit < 0 
+                                    ? 'text-red-700 bg-red-50' 
+                                    : 'text-slate-700 bg-slate-100'
+                              }`}>
+                                {profit > 0 ? '+' : ''}{profit.toFixed(2)} ₽
+                              </div>
+                            </TableCell>
+                            <TableCell className="py-4 px-4 text-center">
+                              <div className={`font-bold px-3 py-2 rounded-lg inline-block ${
+                                profitMargin > 0 
+                                  ? 'text-emerald-700 bg-emerald-50' 
+                                  : profitMargin < 0 
+                                    ? 'text-red-700 bg-red-50' 
+                                    : 'text-slate-700 bg-slate-100'
+                              }`}>
+                                {profitMargin > 0 ? '+' : ''}{profitMargin.toFixed(1)}%
+                              </div>
+                            </TableCell>
+                          </TableRow>
+                        );
+                      })}
+                    </TableBody>
+                  </Table>
+                </CardContent>
+              </Card>
+            ) : (
+              <Card className="shadow-lg border-0 bg-white/90 backdrop-blur-sm">
+                <CardContent className="p-12 text-center">
+                  <div className="bg-slate-100 rounded-full p-6 w-24 h-24 mx-auto mb-6 flex items-center justify-center">
+                    <Package className="w-12 h-12 text-slate-400" />
+                  </div>
+                  <h3 className="text-xl font-semibold text-slate-700 mb-2">
+                    Нет добавленных продуктов
+                  </h3>
+                  <p className="text-slate-500 mb-6">
+                    Перейдите на вкладку "Калькулятор" чтобы добавить первый продукт для анализа
+                  </p>
+                  <Button 
+                    onClick={() => {
+                      // Switch to calculator tab - we'll implement this with state if needed
+                      const calculatorTab = document.querySelector('[value="calculator"]');
+                      if (calculatorTab) calculatorTab.click();
+                    }}
+                    className="bg-slate-900 hover:bg-slate-800"
+                  >
+                    <Plus className="w-4 h-4 mr-2" />
+                    Добавить продукт
+                  </Button>
+                </CardContent>
+              </Card>
+            )}
+          </TabsContent>
+        </Tabs>
       </div>
     </div>
   );
